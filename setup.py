@@ -21,7 +21,7 @@ def read_requirements(filename):
 
 
 NAME = 'binarycookiesreader'
-FOLDER = '.'
+FOLDER = 'bcr'
 DESCRIPTION = 'Binarycookies Reader'
 URL = 'https://github.com/Sitoi/binarycookiesreader'
 EMAIL = '133397418@qq.com'
@@ -113,7 +113,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'binarycookiesreader = src.reader:main'
+            'bcr = bcr:main'
         ]
     }
 )

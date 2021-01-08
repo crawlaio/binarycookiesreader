@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+import argparse
 from io import BytesIO
 from struct import unpack
 from time import gmtime, strftime
 
 
-def main(input_file: str = "Cookies.binarycookies", output_file: str = "result.txt"):
+def parse(input_file: str = "Cookies.binarycookies", output_file: str = "Cookies.txt"):
     binary_file = open(input_file, "rb")
     file_header = binary_file.read(4)
     if file_header == b"cook":
@@ -66,19 +67,19 @@ def main(input_file: str = "Cookies.binarycookies", output_file: str = "result.t
                     value += str(va, encoding="utf-8")
                     va = cookie.read(1)
                 cookie_info = (
-                    "Cookie : "
-                    + name
-                    + "="
-                    + value
-                    + "; domain="
-                    + url
-                    + "; path="
-                    + path
-                    + "; "
-                    + "expires="
-                    + expiry_date
-                    + "; "
-                    + cookie_flags
+                        "Cookie : "
+                        + name
+                        + "="
+                        + value
+                        + "; domain="
+                        + url
+                        + "; path="
+                        + path
+                        + "; "
+                        + "expires="
+                        + expiry_date
+                        + "; "
+                        + cookie_flags
                 )
                 # print(index, cookie_info)
                 cookie_info_list.append(cookie_info)
@@ -89,6 +90,20 @@ def main(input_file: str = "Cookies.binarycookies", output_file: str = "result.t
     else:
         binary_file.close()
         raise
+
+
+def main():
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument(
+        "-i", "--input", type=str, default="Cookies.binarycookies", help="Cookies.binarycookies File Path"
+    )
+    argparser.add_argument("-o", "--output", type=str, default="Cookies.txt", help="Result File Path")
+    args = argparser.parse_args()
+    if args.input and args.output:
+        try:
+            parse(input_file=args.input, output_file=args.output)
+        except Exception as e:
+            raise
 
 
 if __name__ == '__main__':
