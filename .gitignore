@@ -34,5 +34,5 @@ setup.py
 htmls/
 Cookies.binarycookies
 result.txt
-.egg-info/
+*.egg-info/
 dist/
